@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111b29" />
+  <title>صدای مشتری | آرشیو گزارش‌ها</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark">هـ</div>
+      <div class="brand-copy">
+        <div class="brand-title">صدای مشتری</div>
+        <div class="brand-subtitle">همراه کارت · پیام‌های پشتیبانی</div>
+      </div>
+      <div class="topbar-spacer"></div>
+      <div class="secure-label"><span class="secure-dot"></span> پنل داخلی</div>
+    </header>
+
+    <main class="main-content">
+      <section class="intro">
+        <div class="eyebrow">آرشیو گزارش‌ها</div>
+        <h1>گزارش روزانه مشکلات کاربران</h1>
+        <p>خلاصه هر روز، به همراه فهرست مشکلات گزارش‌شده</p>
+      </section>
+
+      <section class="toolbar" aria-label="جست‌وجو و فیلتر گزارش‌ها">
+        <label class="search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="جست‌وجو در تاریخ یا عنوان مشکل..." />
+        </label>
+        <select id="severityFilter" aria-label="فیلتر شدت مشکل">
+          <option value="all">همه شدت‌ها</option>
+          <option value="high">زیاد</option>
+          <option value="medium">متوسط</option>
+          <option value="low">کم</option>
+        </select>
+      </section>
+
+      <div class="results-meta">
+        <span id="reportCount">در حال دریافت گزارش‌ها...</span>
+        <span id="lastUpdated"></span>
+      </div>
+
+      <section id="reports" class="reports" aria-live="polite"></section>
+      <div id="emptyState" class="empty-state" hidden>
+        <div class="empty-icon">⌕</div>
+        <strong>گزارشی پیدا نشد</strong>
+        <span>عبارت جست‌وجو یا فیلتر را تغییر بده.</span>
+      </div>
+      <div id="errorState" class="error-state" hidden></div>
+    </main>
+
+    <footer>سامانه تحلیل صدای مشتری <span>·</span> نسخه نمایشی رابط کاربری</footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
