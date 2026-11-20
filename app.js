@@ -3,7 +3,7 @@
   بعد از آماده‌شدن بک‌اند، API_BASE_URL را تنظیم و USE_API را true کنید.
 */
 const USE_API = true;
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://agent-analysis-b.onrender.com";
 /*کد برای اجرای فرانت: python -m http.server 5500*/
 const reportsElement = document.getElementById("reports");
 const searchInput = document.getElementById("searchInput");
