@@ -36,6 +36,7 @@ async function loadReports() {
 
   try {
     const url = USE_API ? `${API_BASE_URL}/api/reports` : "./reports.json";
+    await new Promise(resolve => setTimeout(resolve, 3000));
     const response = await fetch(url);
 
     if (!response.ok) {
