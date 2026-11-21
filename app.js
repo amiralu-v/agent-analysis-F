@@ -28,23 +28,44 @@ const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
 }[ch]));
 
+
 async function loadReports() {
+  reportCount.classList.add("is-loading");
+  reportCount.textContent = "در حال دریافت گزارش‌ها...";
+  errorState.hidden = true;
+
   try {
     const url = USE_API ? `${API_BASE_URL}/api/reports` : "./reports.json";
     const response = await fetch(url);
-    if (!response.ok) throw new Error(`خطا در دریافت گزارش‌ها (${response.status})`);
+
+    if (!response.ok) {
+      throw new Error(`خطا در دریافت گزارش‌ها (${response.status})`);
+    }
+
     const data = await response.json();
-    // API می‌تواند آرایه گزارش‌ها یا یک گزارش تکی برگرداند.
+
     allReports = Array.isArray(data) ? data : (data.reports || [data]);
-    allReports.sort((a, b) => String(b.report_date).localeCompare(String(a.report_date)));
-    lastUpdated.textContent = `آخرین دریافت: ${new Intl.DateTimeFormat("fa-IR", { hour: "2-digit", minute: "2-digit" }).format(new Date())}`;
+
+    allReports.sort((a, b) =>
+      String(b.report_date).localeCompare(String(a.report_date))
+    );
+
+    lastUpdated.textContent = `آخرین دریافت: ${new Intl.DateTimeFormat("fa-IR", {
+      hour: "2-digit",
+      minute: "2-digit"
+    }).format(new Date())}`;
+
+    reportCount.classList.remove("is-loading");
     renderReports();
+
   } catch (error) {
+    reportCount.classList.remove("is-loading");
     errorState.hidden = false;
     errorState.textContent = `دریافت اطلاعات ناموفق بود: ${error.message}`;
     reportCount.textContent = "گزارشی دریافت نشد";
   }
 }
+
 
 function renderReports() {
   const query = searchInput.value.trim().toLocaleLowerCase("fa");
